@@ -1,0 +1,65 @@
+/* Given an array of positive integers. The task is to find inversion count of array.
+
+Inversion Count : For an array, inversion count indicates how far (or close) the array is from being sorted. If array is already sorted 
+then inversion count is 0. If array is sorted in reverse order that inversion count is the maximum. 
+Formally, two elements a[i] and a[j] form an inversion if a[i] > a[j] and i < j */
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n;
+long long int merge(int a[],int l,int mid,int r)
+{
+    long long int lt=l,mt=mid+1,k=l,cnt=0;
+    long long int arr[r+1];
+    while(lt<=mid&&mt<=r)
+    {
+        if(a[lt]<=a[mt])
+        {
+            arr[k++]=a[lt++];
+        }else
+        {
+            arr[k++]=a[mt++];
+            cnt+=(mid+1-lt);
+        }
+    }
+    while(lt<=mid)
+    {
+        arr[k++]=a[lt++];
+    }
+     while(mt<=r)
+    {
+        arr[k++]=a[mt++];
+    }
+    for(int i=l;i<=r;i++)
+    {
+        a[i]=arr[i];
+    }
+    return cnt;
+}
+long long int merge_sort(int a[],int l,int r)
+{
+    long long int x=0;
+    if(l<r)
+    {
+        long long int mid=(l+r)/2;
+         x=merge_sort(a,l,mid);
+        x+=merge_sort(a,mid+1,r);
+        x+=merge(a,l,mid,r);
+    }return x;
+}
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	     int cnt=0;
+	     int a[n];
+	    for(int j=0;j<n;j++)
+	    {
+	        cin>>a[j];
+	    }
+	  cout<< merge_sort(a,0,n-1)<<endl;
+	}
+	return 0;
+}
