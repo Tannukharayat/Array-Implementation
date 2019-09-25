@@ -1,0 +1,30 @@
+/*Given a list of non negative integers, arrange them in such a manner that they form the largest number possible.The result is going to
+be very large, hence return the result in the form of a string */
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int n,t,max_num;
+bool compare(string x, string y)
+{
+    if(x+y>y+x)
+  return 1;
+  return 0;
+}
+int main() 
+{
+    cin>>t;
+    for(int i=0;i<t;i++)
+    {
+        cin>>n;
+        string arr[n];
+        for(int j=0;j<n;j++)
+        {
+            cin>>arr[j];
+        }
+     sort(arr,arr+n,compare);   
+     for(int j=0;j<n;j++)
+     cout<<arr[j];
+     cout<<endl;
+    }
+	return 0;
+}
