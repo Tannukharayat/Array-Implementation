@@ -1,0 +1,39 @@
+/* Given an array A of size N containing 0s, 1s, and 2s; you need to sort the array in ascending order */
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n;
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    long long int arr[n];
+	   for(int j=0;j<n;j++)
+	   cin>>arr[j];
+    	int h=n-1,l=0,mid=0;
+    	while(mid<=h)
+    	{
+    	    if(arr[mid]==0)
+    	    {
+    	        if(arr[l]!=arr[mid])
+    	        swap(arr[l],arr[mid]);
+    	        l++,mid++;
+    	    }else if(arr[mid]==1)
+    	    {
+    	        mid++;
+    	    }else if(arr[mid]==2)
+    	    {
+    	        if(arr[h]!=arr[mid])
+    	        swap(arr[mid],arr[h]);
+    	        h--;
+    	    }
+    	}
+    	for(int j=0;j<n;j++)
+    	cout<<arr[j]<<" ";
+    	cout<<endl;
+	}
+
+	return 0;
+}
