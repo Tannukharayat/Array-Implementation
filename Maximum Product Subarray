@@ -1,0 +1,39 @@
+/* Given an array A that contains N integers (may be positive, negative or zero). Find the product of the maximum product subarray*/
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n,x;
+long long int max_prod,ans,min_prod,prev_max,prev_min;
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    max_prod=1,min_prod=1,prev_max=1,prev_min=1;
+	  long long int arr[n];
+	    for(int j=0;j<n;j++)
+	    {
+	        cin>>arr[j];
+	    }
+	    ans=INT_MIN;
+	    for(int j=0;j<n;j++)
+	    {
+	        if(arr[j]<0)
+	        {
+	            max_prod=max(prev_min*arr[j],arr[j]);
+	            min_prod=min(prev_max*arr[j],arr[j]);
+	        }else
+	        {
+	            max_prod=max(prev_max*arr[j],arr[j]);
+	            min_prod=min(prev_min*arr[j],arr[j]);
+	        }
+	        if(ans<max(max_prod,min_prod))
+	        ans=max(max_prod,min_prod);
+	        prev_min=min_prod;
+	        prev_max=max_prod;
+	    }
+	    cout<<ans<<endl;
+	}
+	return 0;
+}
